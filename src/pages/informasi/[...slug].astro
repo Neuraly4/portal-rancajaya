@@ -23,6 +23,11 @@ if (entry.data.category.toLowerCase() === "pengumuman") pillClass = "pill-gold";
 else if (entry.data.category.toLowerCase() === "agenda") pillClass = "bg-blue-50 text-blue-700 border-blue-100";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+let thumbnail = entry.data.thumbnail;
+if (thumbnail && thumbnail.startsWith('/')) {
+  thumbnail = base + thumbnail;
+}
 ---
 
 <Layout title={`${entry.data.title} — Desa Rancajaya`} description={entry.data.excerpt}>
@@ -79,9 +84,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <!-- Content -->
     <div class="max-w-4xl mx-auto px-4 md:px-8 -mt-10 relative z-20">
       <div class="card p-6 md:p-10 min-h-[500px] animate-fade-in-up stagger-1">
-        {entry.data.thumbnail && (
+        {thumbnail && (
           <div class="w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8">
-            <img src={entry.data.thumbnail} alt={entry.data.title} class="w-full h-full object-cover" />
+            <img src={thumbnail} alt={entry.data.title} class="w-full h-full object-cover" />
           </div>
         )}
         

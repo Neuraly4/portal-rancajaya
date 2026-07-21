@@ -14,9 +14,11 @@ const { title, excerpt, category, date, slug, featured = false } = Astro.props;
 let pillClass = "pill-primary";
 if (category.toLowerCase() === "pengumuman") pillClass = "pill-gold";
 else if (category.toLowerCase() === "agenda") pillClass = "bg-blue-50 text-blue-700 border-blue-100";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<a href={`/informasi/${slug}`} class="card-hover flex flex-col h-full group overflow-hidden">
+<a href={`${base}/informasi/${slug}`} class="card-hover flex flex-col h-full group overflow-hidden">
   <!-- Image Placeholder -->
   <div class="h-48 w-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center relative overflow-hidden">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary-200 group-hover:scale-110 transition-transform duration-500">
