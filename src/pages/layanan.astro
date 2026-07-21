@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Layout title="Layanan Publik - Desa Rancajaya">
+  <Hero 
+    eyebrow="Layanan" 
+    title="Layanan Publik Desa" 
+    subtitle="Informasi layanan administrasi, pengaduan, dan kontak penting di lingkungan Desa Rancajaya"
+  />
+
+  <section class="section">
+    <div class="container-page">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Kolom Kiri: Kontak & Peta -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="card p-6">
+            <h3 class="font-display font-bold text-lg text-ink mb-4">Kontak Desa</h3>
+            <ul class="flex flex-col gap-4 text-sm">
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="text-muted leading-relaxed">Jl. Raya Rancajaya No. 01, Desa Rancajaya, Kec. Patokbeusi, Kab. Subang, Jawa Barat</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span class="text-muted">desa.rancajaya@gmail.com</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="text-ink font-semibold">(0260) 1234567</span>
+              </li>
+            </ul>
+            
+            <div class="mt-6 pt-6 border-t border-line">
+              <h4 class="font-semibold text-sm text-ink mb-3">Jam Pelayanan</h4>
+              <ul class="flex flex-col gap-2 text-sm text-muted">
+                <li class="flex justify-between">
+                  <span>Senin - Jumat</span>
+                  <span class="font-semibold text-ink">08:00 - 16:00</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Sabtu</span>
+                  <span class="font-semibold text-ink">08:00 - 12:00</span>
+                </li>
+                <li class="flex justify-between text-red-600">
+                  <span>Minggu / Libur</span>
+                  <span class="font-semibold">Tutup</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card overflow-hidden h-48 bg-paper flex items-center justify-center border-2 border-dashed border-line">
+             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted mb-2"><map-pin></map-pin></svg>
+             <p class="text-sm text-muted font-medium">Google Maps Kantor Desa</p>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Formulir & FAQ -->
+        <div class="lg:col-span-8 space-y-10">
+          <!-- Surat Pengantar -->
+          <div>
+            <h2 class="font-display font-bold text-2xl text-ink mb-4">Layanan Administrasi Daring</h2>
+            <p class="text-sm text-muted mb-6">Ajukan permohonan surat pengantar dan administrasi lainnya melalui formulir online untuk mempercepat pelayanan sebelum datang ke balai desa.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a href="#" class="card-hover p-5 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-700 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-ink text-sm mb-1">Surat Pengantar RT/RW</h3>
+                  <p class="text-xs text-muted">Pengajuan pengantar umum</p>
+                </div>
+              </a>
+              <a href="#" class="card-hover p-5 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-700 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-ink text-sm mb-1">Surat Keterangan Usaha (SKU)</h3>
+                  <p class="text-xs text-muted">Untuk keperluan kredit/usaha</p>
+                </div>
+              </a>
+              <a href="#" class="card-hover p-5 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-700 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-ink text-sm mb-1">Surat Keterangan Tidak Mampu</h3>
+                  <p class="text-xs text-muted">SKTM untuk bantuan/sekolah</p>
+                </div>
+              </a>
+              <a href="#" class="card-hover p-5 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center text-primary-700 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-ink text-sm mb-1">Surat Keterangan Domisili</h3>
+                  <p class="text-xs text-muted">Keterangan tempat tinggal</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Layanan Darurat -->
+          <div>
+            <h2 class="font-display font-bold text-2xl text-ink mb-4">Layanan Darurat & Penting</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="card p-4 flex items-center justify-between border-l-4 border-l-red-500">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  </div>
+                  <span class="font-bold text-ink text-sm">Puskesmas / Bidan</span>
+                </div>
+                <span class="text-sm font-semibold text-primary-700">0812-XXXX</span>
+              </div>
+              <div class="card p-4 flex items-center justify-between border-l-4 border-l-blue-500">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <span class="font-bold text-ink text-sm">Bhabinkamtibmas</span>
+                </div>
+                <span class="text-sm font-semibold text-primary-700">0813-XXXX</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <div>
+            <h2 class="font-display font-bold text-2xl text-ink mb-4">Tanya Jawab (FAQ)</h2>
+            <div class="space-y-3">
+              {[
+                {q: "Apa saja syarat membuat SKTM?", a: "Fotokopi KTP, Fotokopi KK, Surat Pengantar dari RT/RW setempat, dan foto rumah (opsional sesuai peruntukan)."},
+                {q: "Berapa lama proses pembuatan surat keterangan?", a: "Jika seluruh persyaratan lengkap dan ditandatangani RT/RW, surat dapat ditunggu langsung di kantor desa (sekitar 15-30 menit)."},
+                {q: "Apakah pelayanan di balai desa dipungut biaya?", a: "Seluruh pelayanan administrasi dasar di Kantor Desa Rancajaya adalah GRATIS (tidak dipungut biaya)."},
+              ].map((faq) => (
+                <details class="card group">
+                  <summary class="flex items-center justify-between font-semibold p-4 cursor-pointer list-none text-sm text-ink group-open:text-primary-700">
+                    {faq.q}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-open:rotate-180"><polyline points="6 9 12 15 18 9"/></svg>
+                  </summary>
+                  <div class="px-4 pb-4 text-sm text-muted border-t border-line/50 pt-3">
+                    {faq.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+// Fetch and sort articles by date (newest first)
+const allArticles = await getCollection('berita');
+const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Berita & Informasi — Desa Rancajaya" description="Berita terbaru, agenda, pengumuman, dan informasi penting dari Desa Rancajaya, Kecamatan Patokbeusi, Kabupaten Subang.">
+
+  <!-- 1. Hero -->
+  <Hero
+    eyebrow="Informasi"
+    title="Berita & Informasi Desa"
+    subtitle="Kabar terbaru dan informasi penting dari Desa Rancajaya"
+  />
+
+  <!-- 2. Search & Filter -->
+  <section class="section bg-white border-b border-line">
+    <div class="container-page">
+      <!-- Search Input -->
+      <div class="relative max-w-xl mx-auto mb-6 animate-fade-in-up">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+        <input
+          type="text"
+          placeholder="Cari berita atau informasi..."
+          class="w-full pl-11 pr-4 py-3 rounded-lg border border-line bg-white text-ink text-sm placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-400 transition-all"
+        />
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="flex flex-wrap justify-center gap-2 animate-fade-in-up stagger-1">
+        <button class="pill-primary">Semua</button>
+        <button class="pill-gold">Berita</button>
+        <button class="px-4 py-1.5 rounded-pill text-sm font-medium border border-line text-muted hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all">Agenda</button>
+        <button class="px-4 py-1.5 rounded-pill text-sm font-medium border border-line text-muted hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all">Artikel</button>
+        <button class="px-4 py-1.5 rounded-pill text-sm font-medium border border-line text-muted hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all">Pengumuman</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Article Grid -->
+  <section class="section bg-paper">
+    <div class="container-page">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedArticles.map((article) => {
+          const dateFormatted = new Intl.DateTimeFormat('id-ID', {
+            dateStyle: 'medium',
+          }).format(article.data.date);
+
+          return (
+            <ArticleCard
+              title={article.data.title}
+              excerpt={article.data.excerpt}
+              category={article.data.category}
+              date={dateFormatted}
+              slug={article.slug}
+              featured={article.data.featured}
+            />
+          );
+        })}
+      </div>
+
+      <!-- 4. Pagination -->
+      <nav class="flex justify-center items-center gap-2 mt-10 animate-fade-in-up" aria-label="Pagination">
+        <button class="w-10 h-10 rounded-xl bg-primary-700 text-white text-sm font-semibold flex items-center justify-center" aria-current="page">
+          1
+        </button>
+        <button class="w-10 h-10 rounded-xl border border-line text-muted text-sm font-semibold flex items-center justify-center hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all">
+          2
+        </button>
+        <button class="w-10 h-10 rounded-xl border border-line text-muted text-sm font-semibold flex items-center justify-center hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all">
+          3
+        </button>
+        <button class="w-10 h-10 rounded-xl border border-line text-muted text-sm font-semibold flex items-center justify-center hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all" aria-label="Halaman selanjutnya">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </section>
+
+</Layout>

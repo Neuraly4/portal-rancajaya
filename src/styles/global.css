@@ -1,0 +1,114 @@
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Base Resets ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply font-body text-ink bg-paper antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-semibold tracking-tight;
+  }
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+/* ===== Reusable Component Classes ===== */
+@layer components {
+  /* Container */
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 md:px-8;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-line rounded-2xl shadow-sm;
+  }
+  .card-hover {
+    @apply card transition-all duration-300 hover:shadow-md hover:border-primary-300 hover:-translate-y-0.5;
+  }
+  .stat-card {
+    @apply bg-white border border-line rounded-xl p-4;
+  }
+  .stat-card-dark {
+    @apply bg-gradient-to-br from-primary-700 to-primary-900 text-white rounded-xl p-4;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-primary-700 text-white px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:bg-primary-600 active:scale-[0.98];
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-gold-500 text-primary-900 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:bg-gold-600 active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 bg-white border border-line text-ink px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:bg-primary-50 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-primary-700 font-semibold text-sm hover:underline transition-all;
+  }
+
+  /* Pills / Badges */
+  .pill {
+    @apply inline-flex items-center px-3 py-1 rounded-pill text-xs font-semibold border;
+  }
+  .pill-primary {
+    @apply pill bg-primary-50 text-primary-700 border-primary-100;
+  }
+  .pill-gold {
+    @apply pill bg-gold-50 text-gold-700 border-gold-100;
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-12 md:py-16;
+  }
+  .section-header {
+    @apply mb-8 md:mb-12;
+  }
+  .section-title {
+    @apply font-display text-2xl md:text-3xl font-bold text-ink;
+  }
+  .section-subtitle {
+    @apply text-muted text-sm md:text-base mt-2 max-w-2xl;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary-600;
+  }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Staggered entrance */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }

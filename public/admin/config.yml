@@ -1,0 +1,148 @@
+backend:
+  name: github
+  repo: Neuraly4/portal-rancajaya
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: 'id'
+
+collections:
+  # --- Berita ---
+  - name: "berita"
+    label: "Berita & Artikel"
+    folder: "src/content/berita"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "datetime" }
+      - label: "Kategori"
+        name: "category"
+        widget: "select"
+        options: ["Berita", "Agenda", "Artikel", "Pengumuman"]
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Ringkasan", name: "excerpt", widget: "text" }
+      - { label: "Penulis", name: "author", widget: "string", default: "Admin Desa" }
+      - { label: "Tampilkan di Beranda", name: "featured", widget: "boolean", default: false }
+      - { label: "Konten", name: "body", widget: "markdown" }
+
+  # --- Perangkat Desa ---
+  - name: "perangkat_desa"
+    label: "Perangkat Desa"
+    folder: "src/content/perangkat-desa"
+    create: true
+    fields:
+      - { label: "Nama", name: "nama", widget: "string" }
+      - { label: "Jabatan", name: "jabatan", widget: "string" }
+      - { label: "Foto", name: "foto", widget: "image", required: false }
+      - { label: "Urutan", name: "urutan", widget: "number", value_type: "int" }
+      - { label: "Deskripsi", name: "deskripsi", widget: "text", required: false }
+
+  # --- Wisata ---
+  - name: "wisata"
+    label: "Wisata"
+    folder: "src/content/wisata"
+    create: true
+    fields:
+      - { label: "Nama", name: "nama", widget: "string" }
+      - label: "Jenis"
+        name: "jenis"
+        widget: "select"
+        options: ["Alam", "Budaya", "Kuliner", "Edukasi"]
+      - { label: "Deskripsi", name: "deskripsi", widget: "markdown" }
+      - { label: "Lokasi", name: "lokasi", widget: "string" }
+      - { label: "Foto", name: "foto", widget: "image", required: false }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["Aktif", "Dalam Pengembangan"]
+
+  # --- UMKM ---
+  - name: "umkm"
+    label: "UMKM"
+    folder: "src/content/umkm"
+    create: true
+    fields:
+      - { label: "Nama Produk", name: "nama_produk", widget: "string" }
+      - { label: "Harga", name: "harga", widget: "string" }
+      - label: "Kategori"
+        name: "kategori"
+        widget: "select"
+        options: ["Makanan", "Minuman", "Kerajinan", "Pertanian", "Lainnya"]
+      - { label: "Nama Toko", name: "toko", widget: "string" }
+      - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+      - { label: "Deskripsi", name: "deskripsi", widget: "markdown" }
+      - { label: "Foto", name: "foto", widget: "image", required: false }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["Aktif", "Nonaktif"]
+
+  # --- Galeri ---
+  - name: "galeri"
+    label: "Galeri"
+    folder: "src/content/galeri"
+    create: true
+    fields:
+      - { label: "Judul", name: "judul", widget: "string" }
+      - { label: "Tanggal", name: "tanggal", widget: "date" }
+      - label: "Kategori"
+        name: "kategori"
+        widget: "select"
+        options: ["Kegiatan", "Pembangunan", "Budaya", "Pertanian", "Lainnya"]
+      - { label: "Foto", name: "foto", widget: "image" }
+      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+
+  # --- Kelompok Tani ---
+  - name: "kelompok_tani"
+    label: "Kelompok Tani"
+    folder: "src/content/kelompok-tani"
+    create: true
+    fields:
+      - { label: "Nama Kelompok", name: "nama", widget: "string" }
+      - { label: "Ketua", name: "ketua", widget: "string" }
+      - { label: "Dusun", name: "dusun", widget: "string" }
+      - { label: "Komoditas Utama", name: "komoditas_utama", widget: "string" }
+      - { label: "Jumlah Anggota", name: "jumlah_anggota", widget: "number", value_type: "int" }
+      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+      - { label: "Kontak", name: "kontak", widget: "string", required: false }
+
+  # --- Layanan Darurat ---
+  - name: "layanan_darurat"
+    label: "Layanan Darurat"
+    folder: "src/content/layanan-darurat"
+    create: true
+    fields:
+      - { label: "Nama", name: "nama", widget: "string" }
+      - label: "Jenis"
+        name: "jenis"
+        widget: "select"
+        options: ["Kesehatan", "Keamanan", "Darurat"]
+      - { label: "Telepon", name: "telepon", widget: "string" }
+      - { label: "Alamat", name: "alamat", widget: "string" }
+      - { label: "Deskripsi", name: "deskripsi", widget: "text" }
+
+  # --- Pengaturan Umum (Single File) ---
+  - name: "pengaturan"
+    label: "Pengaturan"
+    files:
+      - label: "Pengaturan Umum"
+        name: "umum"
+        file: "src/content/pengaturan/umum.json"
+        fields:
+          - { label: "Nama Desa", name: "nama_desa", widget: "string" }
+          - { label: "Kecamatan", name: "kecamatan", widget: "string" }
+          - { label: "Kabupaten", name: "kabupaten", widget: "string" }
+          - { label: "Provinsi", name: "provinsi", widget: "string" }
+          - { label: "Visi", name: "visi", widget: "text" }
+          - { label: "Sejarah", name: "sejarah", widget: "markdown" }
+          - label: "Misi"
+            name: "misi"
+            widget: "list"
+            field: { label: "Item Misi", name: "item", widget: "string" }
+          - { label: "Alamat Kantor", name: "alamat_kantor", widget: "text" }
+          - { label: "Telepon", name: "telepon", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Jam Operasional", name: "jam_operasional", widget: "text" }

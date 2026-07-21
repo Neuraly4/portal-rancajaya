@@ -1,0 +1,113 @@
+---
+const pathname = Astro.url.pathname;
+const navLinks = [
+  { name: 'Beranda', href: '/' },
+  { name: 'Profil Desa', href: '/profil' },
+  { name: 'Informasi', href: '/informasi' },
+  { name: 'Pertanian', href: '/pertanian' },
+  { name: 'Layanan', href: '/layanan' },
+];
+---
+
+<nav class="sticky top-0 z-50 h-16 bg-white border-b border-line shadow-sm" aria-label="Navigasi Utama">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 h-full flex items-center justify-between">
+    <!-- Left: Brand -->
+    <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+      <div class="w-10 h-10 rounded-xl bg-primary-700 flex items-center justify-center text-gold-100 shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+        </svg>
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="font-display font-bold text-primary-700 text-sm tracking-wide">DESA RANCAJAYA</span>
+        <span class="text-[10px] text-muted font-medium">Kec. Patokbeusi, Kab. Subang</span>
+      </div>
+    </a>
+
+    <!-- Center: Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-8 h-full">
+      {navLinks.map((link) => {
+        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class={`text-sm font-semibold h-full flex items-center border-b-2 transition-colors ${
+              isActive 
+                ? 'text-primary-700 border-primary-700' 
+                : 'text-muted border-transparent hover:text-primary-700'
+            }`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Right: Desktop CTA & Mobile Toggle -->
+    <div class="flex items-center gap-4">
+      <a href="/layanan" class="hidden md:inline-flex btn-primary !px-4 !py-2 !text-xs">
+        Hubungi Kami
+      </a>
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-ink hover:bg-paper rounded-lg transition-colors" aria-label="Buka Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm hidden opacity-0 transition-opacity">
+  <div class="absolute right-0 top-0 bottom-0 w-64 bg-white shadow-xl transform translate-x-full transition-transform duration-300 flex flex-col" id="mobile-drawer-content">
+    <div class="p-4 border-b border-line flex justify-end">
+      <button id="close-menu-btn" class="p-2 text-ink hover:bg-paper rounded-lg" aria-label="Tutup Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="flex flex-col py-2 overflow-y-auto">
+      {navLinks.map((link) => (
+        <a href={link.href} class="px-6 py-4 flex items-center justify-between border-b border-line/50 hover:bg-primary-50 text-sm font-semibold text-ink">
+          {link.name}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const closeBtn = document.getElementById('close-menu-btn');
+  const drawer = document.getElementById('mobile-drawer');
+  const drawerContent = document.getElementById('mobile-drawer-content');
+
+  function openMenu() {
+    if(!drawer || !drawerContent) return;
+    drawer.classList.remove('hidden');
+    // small delay to allow display:block to apply before animating opacity
+    setTimeout(() => {
+      drawer.classList.remove('opacity-0');
+      drawerContent.classList.remove('translate-x-full');
+    }, 10);
+  }
+
+  function closeMenu() {
+    if(!drawer || !drawerContent) return;
+    drawer.classList.add('opacity-0');
+    drawerContent.classList.add('translate-x-full');
+    setTimeout(() => {
+      drawer.classList.add('hidden');
+    }, 300); // match transition duration
+  }
+
+  menuBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  drawer?.addEventListener('click', (e) => {
+    if (e.target === drawer) closeMenu();
+  });
+</script>
