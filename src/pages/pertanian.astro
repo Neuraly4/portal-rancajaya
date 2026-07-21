@@ -1,36 +1,43 @@
 ---
+import { getEntry, getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import StatCard from '../components/StatCard.astro';
+
+const pertanianData = await getEntry('halaman', 'pertanian');
+const umumData = await getEntry('pengaturan', 'umum');
+const pertanian = pertanianData?.data || {};
+const common = umumData?.data || {};
+const kelompokTani = await getCollection('kelompok-tani');
 ---
 
-<Layout title="Pertanian - Desa Rancajaya">
+<Layout title={`Pertanian - ${common.nama_desa || 'Desa Rancajaya'}`}>
   <Hero 
     eyebrow="Potensi Desa" 
     title="Sektor Pertanian" 
-    subtitle="Pertanian sebagai tulang punggung perekonomian Desa Rancajaya"
+    subtitle={`Pertanian sebagai tulang punggung perekonomian ${common.nama_desa || 'Desa Rancajaya'}`}
   />
 
   <!-- Statistik Pertanian -->
   <section class="section bg-white border-b border-line">
     <div class="container-page">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <StatCard label="Luas Lahan" value="450 Ha">
+        <StatCard label="Luas Lahan" value={`${pertanian.luas_lahan || '0'} Ha`}>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 22 2"/><path d="m2 2 20 20"/><path d="M14 10v4"/><path d="M10 14v4"/><path d="M6 18v4"/><path d="M18 6v4"/></svg>
         </StatCard>
-        <StatCard label="Komoditas Utama" value="Padi">
+        <StatCard label="Komoditas Utama" value={pertanian.komoditas || 'Padi'}>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 7v2"/><path d="M15 7v2"/><path d="M12 2a5 5 0 0 0-5 5v5a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5Z"/></svg>
         </StatCard>
-        <StatCard label="Kelompok Tani" value="12 Klp">
+        <StatCard label="Kelompok Tani" value={`${pertanian.jumlah_kelompok || '0'} Klp`}>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </StatCard>
-        <StatCard label="Jumlah Petani" value="±2.500">
+        <StatCard label="Jumlah Petani" value={`±${pertanian.jumlah_petani || '0'}`}>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </StatCard>
-        <StatCard label="Irigasi" value="Teknis">
+        <StatCard label="Irigasi" value={pertanian.irigasi || 'Teknis'}>
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="M4.93 4.93l14.14 14.14"/><path d="M19.07 4.93L4.93 19.07"/></svg>
         </StatCard>
-        <StatCard label="Produktivitas" value="6.5 T/Ha" variant="dark">
+        <StatCard label="Produktivitas" value={`${pertanian.produktivitas || '0'} T/Ha`} variant="dark">
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
         </StatCard>
       </div>
@@ -43,7 +50,7 @@ import StatCard from '../components/StatCard.astro';
       <div class="section-header text-center flex flex-col items-center">
         <span class="eyebrow mb-2">PRODUK LOKAL</span>
         <h2 class="section-title">Komoditas Unggulan</h2>
-        <p class="section-subtitle text-center">Hasil bumi utama yang menjadi tumpuan perekonomian dan kebanggaan Desa Rancajaya.</p>
+        <p class="section-subtitle text-center">Hasil bumi utama yang menjadi tumpuan perekonomian dan kebanggaan {common.nama_desa || 'Desa Rancajaya'}.</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -93,28 +100,30 @@ import StatCard from '../components/StatCard.astro';
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {[1, 2, 3, 4].map((i) => (
+        {kelompokTani.length > 0 ? kelompokTani.map((poktan) => (
           <div class="card p-5 flex flex-col sm:flex-row gap-4">
             <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center text-primary-700 shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <div class="flex-grow">
-              <h3 class="font-bold text-ink text-lg">Poktan Tani Makmur {i}</h3>
-              <p class="text-xs text-muted mb-3">Ketua: Bapak Ahmad {i}</p>
+              <h3 class="font-bold text-ink text-lg">{poktan.data.nama}</h3>
+              <p class="text-xs text-muted mb-3">Ketua: {poktan.data.ketua}</p>
               
               <div class="grid grid-cols-2 gap-2 text-sm">
                 <div>
                   <span class="block text-muted text-xs">Dusun</span>
-                  <span class="font-semibold text-ink">Dusun {i}</span>
+                  <span class="font-semibold text-ink">{poktan.data.dusun}</span>
                 </div>
                 <div>
                   <span class="block text-muted text-xs">Anggota</span>
-                  <span class="font-semibold text-ink">{25 + i * 5} Orang</span>
+                  <span class="font-semibold text-ink">{poktan.data.jumlah_anggota} Orang</span>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        )) : (
+          <p class="text-muted col-span-2 text-center">Data kelompok tani belum ditambahkan.</p>
+        )}
       </div>
     </div>
   </section>
@@ -130,17 +139,17 @@ import StatCard from '../components/StatCard.astro';
         
         <div class="p-6 md:p-8 flex flex-col justify-center">
           <span class="eyebrow mb-2">HUBUNGI KAMI</span>
-          <h2 class="text-2xl font-bold font-display text-ink mb-4">Gabungan Kelompok Tani (Gapoktan) Desa Rancajaya</h2>
+          <h2 class="text-2xl font-bold font-display text-ink mb-4">Gabungan Kelompok Tani (Gapoktan) {common.nama_desa || 'Desa Rancajaya'}</h2>
           <p class="text-muted mb-6 text-sm">Untuk informasi terkait penyuluhan, bantuan pupuk subsidi, alat mesin pertanian, dan keanggotaan kelompok tani, silakan hubungi pengurus Gapoktan.</p>
           
           <ul class="space-y-4 mb-8">
             <li class="flex items-start gap-3 text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-700 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span class="text-ink font-semibold">0812-XXXX-XXXX (Bpk. Ketua Gapoktan)</span>
+              <span class="text-ink font-semibold">{common.telepon || '0812-XXXX-XXXX'} (Bpk. Ketua Gapoktan)</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-700 shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span class="text-muted">Sekretariat Gapoktan, Komplek Balai Desa Rancajaya</span>
+              <span class="text-muted">Sekretariat Gapoktan, Komplek Balai Desa {common.nama_desa || 'Rancajaya'}</span>
             </li>
           </ul>
           

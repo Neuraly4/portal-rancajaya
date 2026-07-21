@@ -1,21 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+
+const umumData = await getEntry('pengaturan', 'umum');
+const common = umumData?.data || {};
 
 // Fetch and sort articles by date (newest first)
 const allArticles = await getCollection('berita');
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Berita & Informasi — Desa Rancajaya" description="Berita terbaru, agenda, pengumuman, dan informasi penting dari Desa Rancajaya, Kecamatan Patokbeusi, Kabupaten Subang.">
+<Layout title={`Berita & Informasi — ${common.nama_desa || 'Desa Rancajaya'}`} description={`Berita terbaru, agenda, pengumuman, dan informasi penting dari ${common.nama_desa || 'Desa Rancajaya'}, Kecamatan ${common.kecamatan || 'Patokbeusi'}, Kabupaten ${common.kabupaten || 'Subang'}.`}>
 
   <!-- 1. Hero -->
   <Hero
     eyebrow="Informasi"
     title="Berita & Informasi Desa"
-    subtitle="Kabar terbaru dan informasi penting dari Desa Rancajaya"
+    subtitle={`Kabar terbaru dan informasi penting dari ${common.nama_desa || 'Desa Rancajaya'}`}
   />
 
   <!-- 2. Search & Filter -->

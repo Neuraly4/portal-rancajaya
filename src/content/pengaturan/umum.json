@@ -3,17 +3,15 @@
   "kecamatan": "Patokbeusi",
   "kabupaten": "Subang",
   "provinsi": "Jawa Barat",
-  "visi": "Terwujudnya Desa Rancajaya yang maju, mandiri, dan sejahtera berbasis pertanian dan kearifan lokal.",
-  "sejarah": "Desa Rancajaya merupakan salah satu desa di Kecamatan Patokbeusi, Kabupaten Subang, Provinsi Jawa Barat. Desa ini memiliki luas wilayah 8,11 km² yang sebagian besar digunakan untuk lahan pertanian, khususnya padi sawah.",
+  "visi": "Menjadikan Desa Rancajaya yang Mandiri, Sejahtera, dan Berbudaya berbasis Pertanian.",
+  "sejarah": "Desa Rancajaya adalah sebuah desa agraris yang terletak di Kabupaten Subang...",
   "misi": [
-    "Meningkatkan kualitas pelayanan publik yang transparan dan akuntabel",
-    "Mengembangkan potensi pertanian dan UMKM desa",
-    "Meningkatkan kualitas sumber daya manusia melalui pendidikan dan pelatihan",
-    "Membangun infrastruktur desa yang memadai dan berkelanjutan",
-    "Melestarikan budaya dan kearifan lokal"
+    "Meningkatkan kualitas pelayanan publik desa.",
+    "Mengembangkan potensi pertanian dan UMKM.",
+    "Membangun infrastruktur desa yang memadai."
   ],
   "alamat_kantor": "Jl. Raya Rancajaya No. 01, Desa Rancajaya, Kec. Patokbeusi, Kab. Subang, Jawa Barat",
-  "telepon": "(0260) XXXXXXX",
+  "telepon": "(0260) 1234567",
   "email": "desa.rancajaya@gmail.com",
-  "jam_operasional": "Senin - Jumat: 08.00 - 16.00 WIB\nSabtu: 08.00 - 12.00 WIB\nMinggu & Hari Libur: Tutup"
+  "jam_operasional": "Senin - Jumat 08:00 - 16:00"
 }

@@ -1,9 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import StatCard from '../components/StatCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+
+// Fetch CMS Data
+const umumData = await getEntry('pengaturan', 'umum');
+const berandaData = await getEntry('halaman', 'beranda');
+const common = umumData?.data || {};
+const beranda = berandaData?.data || {};
 
 // Ambil 3 berita terbaru
 const allArticles = await getCollection('berita');
@@ -19,11 +25,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <!-- 1. Hero -->
   <Hero
     eyebrow="Selamat Datang di"
-    title="Desa Rancajaya"
-    subtitle="Desa yang asri dan sejahtera di Kecamatan Patokbeusi, Kabupaten Subang, Jawa Barat. Bersama membangun desa yang lebih maju."
+    title={beranda.hero_title || "Portal Rancajaya"}
+    subtitle={beranda.hero_subtitle || "Media informasi, potensi desa, layanan masyarakat, dan digitalisasi UMKM Desa Rancajaya"}
     showCTA={true}
     ctaText="Jelajahi Desa"
     ctaHref={`${base}/profil`}
+    bgImage={beranda.hero_bg}
   />
 
   <!-- 2. Quick Navigation -->
@@ -33,7 +40,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center text-primary-700 mb-3 group-hover:bg-primary-100 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
         </div>
-        <span class="font-semibold text-sm text-ink group-hover:text-primary-700">Profil Desa</span>
+        <span class="font-semibold text-sm text-ink group-hover:text-primary-700">Profil {common.nama_desa || "Desa"}</span>
       </a>
       <a href={`${base}/informasi`} class="card-hover p-6 flex flex-col items-center justify-center text-center group">
         <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center text-primary-700 mb-3 group-hover:bg-primary-100 transition-colors">
@@ -66,18 +73,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <section class="section bg-white border-y border-line">
     <div class="container-page">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Luas Wilayah" value="8.11 km²">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="M4.93 4.93l14.14 14.14"/><path d="M19.07 4.93L4.93 19.07"/></svg>
-        </StatCard>
-        <StatCard label="Jumlah Dusun" value="4 Dusun">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
-        </StatCard>
-        <StatCard label="Jumlah RT" value="25 RT">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </StatCard>
-        <StatCard label="Jumlah Penduduk" value="±8.500">
-          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </StatCard>
+        {(beranda.statistik || []).map((stat) => (
+          <StatCard label={stat.label} value={stat.value}>
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </StatCard>
+        ))}
       </div>
     </div>
   </section>
@@ -88,8 +88,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <span class="eyebrow mb-2">POTENSI UNGGULAN</span>
-          <h2 class="section-title mb-4">Lumbung Padi di Utara Subang</h2>
-          <p class="section-subtitle mb-6">Sebagian besar wilayah Desa Rancajaya merupakan hamparan sawah yang membentang luas. Sektor pertanian menjadi tulang punggung perekonomian masyarakat kami dengan komoditas unggulan berupa padi sawah yang ditunjang oleh sistem irigasi teknis.</p>
+          <h2 class="section-title mb-4">{beranda.highlight_title || "Lumbung Padi di Utara Subang"}</h2>
+          <p class="section-subtitle mb-6">{beranda.highlight_desc}</p>
           <a href={`${base}/pertanian`} class="btn-ghost">
             Jelajahi Potensi Pertanian
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -97,8 +97,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </div>
         <div class="relative">
           <div class="absolute inset-0 bg-gold-500 rounded-2xl transform translate-x-3 translate-y-3 opacity-20"></div>
-          <div class="h-80 w-full bg-primary-100 rounded-2xl relative z-10 flex items-center justify-center border border-line">
-            <span class="text-primary-300 font-medium">Foto Hamparan Sawah</span>
+          <div class="h-80 w-full bg-primary-100 rounded-2xl relative z-10 flex items-center justify-center border border-line overflow-hidden">
+            {beranda.highlight_image ? (
+              <img src={beranda.highlight_image.startsWith('/') ? base + beranda.highlight_image : beranda.highlight_image} alt={beranda.highlight_title} class="w-full h-full object-cover" />
+            ) : (
+              <span class="text-primary-300 font-medium">Foto Hamparan Sawah</span>
+            )}
           </div>
         </div>
       </div>
@@ -154,7 +158,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <circle cx="12" cy="10" r="3"></circle>
         </svg>
         <span class="text-primary-500 font-medium text-sm">Google Maps akan ditampilkan di sini</span>
-        <span class="text-primary-400 text-xs mt-1">Desa Rancajaya, Kec. Patokbeusi, Kab. Subang</span>
+        <span class="text-primary-400 text-xs mt-1">
+          {common.nama_desa ? `Desa ${common.nama_desa}` : "Desa Rancajaya"}, 
+          Kec. {common.kecamatan || "Patokbeusi"}, 
+          Kab. {common.kabupaten || "Subang"}
+        </span>
       </div>
     </div>
   </section>

@@ -5,6 +5,5 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://Neuraly4.github.io',
-  base: '/portal-rancajaya',
+  site: 'https://portal-rancajaya.netlify.app',
 });

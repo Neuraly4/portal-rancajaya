@@ -1,6 +1,6 @@
-# Website Profil Desa Rancajaya
+# Portal Rancajaya
 
-Website resmi untuk profil, informasi, potensi pertanian, dan layanan administrasi Desa Rancajaya. Dibangun menggunakan [Astro](https://astro.build) dan [Decap CMS](https://decapcms.org/).
+Website resmi (Portal) untuk profil, informasi, potensi pertanian, dan layanan administrasi Desa Rancajaya. Dibangun menggunakan [Astro](https://astro.build) dan [Decap CMS](https://decapcms.org/).
 
 ## Konfigurasi GitHub Pages
 Website ini dikonfigurasi untuk berjalan di GitHub Pages.

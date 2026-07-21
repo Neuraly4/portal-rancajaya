@@ -1,10 +1,11 @@
 backend:
-  name: github
-  repo: Neuraly4/portal-rancajaya
+  name: git-gateway
   branch: main
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
+media_library:
+  max_file_size: 512000 # 500 KB limit for images to optimize load times
 
 locale: 'id'
 
@@ -137,7 +138,7 @@ collections:
           - { label: "Kabupaten", name: "kabupaten", widget: "string" }
           - { label: "Provinsi", name: "provinsi", widget: "string" }
           - { label: "Visi", name: "visi", widget: "text" }
-          - { label: "Sejarah", name: "sejarah", widget: "markdown" }
+          - { label: "Sejarah Singkat", name: "sejarah", widget: "markdown" }
           - label: "Misi"
             name: "misi"
             widget: "list"
@@ -146,3 +147,44 @@ collections:
           - { label: "Telepon", name: "telepon", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Jam Operasional", name: "jam_operasional", widget: "text" }
+
+      - label: "Halaman Beranda"
+        name: "beranda"
+        file: "src/content/halaman/beranda.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Hero Background Image", name: "hero_bg", widget: "image", required: false }
+          - { label: "Highlight Title", name: "highlight_title", widget: "string" }
+          - { label: "Highlight Description", name: "highlight_desc", widget: "text" }
+          - { label: "Highlight Image", name: "highlight_image", widget: "image", required: false }
+          - label: "Statistik"
+            name: "statistik"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+
+      - label: "Halaman Profil"
+        name: "profil"
+        file: "src/content/halaman/profil.json"
+        fields:
+          - { label: "Kata Sambutan", name: "sambutan", widget: "text" }
+          - { label: "Nama Kepala Desa", name: "nama_kades", widget: "string" }
+          - { label: "Foto Kepala Desa", name: "foto_kades", widget: "image" }
+          - { label: "Luas Wilayah (km2)", name: "luas_wilayah", widget: "string" }
+          - { label: "Dusun", name: "dusun", widget: "list", field: { label: "Nama Dusun", name: "nama", widget: "string" } }
+          - { label: "Total Penduduk", name: "penduduk_total", widget: "string" }
+          - { label: "Penduduk Pria", name: "penduduk_pria", widget: "string" }
+          - { label: "Penduduk Wanita", name: "penduduk_wanita", widget: "string" }
+
+      - label: "Halaman Pertanian"
+        name: "pertanian"
+        file: "src/content/halaman/pertanian.json"
+        fields:
+          - { label: "Luas Lahan (Ha)", name: "luas_lahan", widget: "string" }
+          - { label: "Komoditas Utama", name: "komoditas", widget: "string" }
+          - { label: "Jumlah Kelompok Tani", name: "jumlah_kelompok", widget: "string" }
+          - { label: "Jumlah Petani", name: "jumlah_petani", widget: "string" }
+          - { label: "Jenis Irigasi", name: "irigasi", widget: "string" }
+          - { label: "Produktivitas (Ton/Ha)", name: "produktivitas", widget: "string" }

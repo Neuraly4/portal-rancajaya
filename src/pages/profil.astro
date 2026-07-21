@@ -1,16 +1,26 @@
 ---
+import { getEntry, getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import StatCard from '../components/StatCard.astro';
+
+const profilData = await getEntry('halaman', 'profil');
+const umumData = await getEntry('pengaturan', 'umum');
+const profil = profilData?.data || {};
+const common = umumData?.data || {};
+const perangkatDesa = await getCollection('perangkat-desa');
+const sortedPerangkat = perangkatDesa.sort((a, b) => a.data.urutan - b.data.urutan);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<Layout title="Profil Desa — Desa Rancajaya" description="Profil lengkap Desa Rancajaya meliputi visi misi, perangkat desa, wilayah administrasi, demografi, dan transparansi APBDes.">
+<Layout title={`Profil Desa — ${common.nama_desa || 'Desa Rancajaya'}`} description={`Profil lengkap Desa ${common.nama_desa || 'Rancajaya'} meliputi visi misi, perangkat desa, wilayah administrasi, demografi, dan transparansi APBDes.`}>
 
   <!-- 1. Hero -->
   <Hero
     eyebrow="Profil"
-    title="Profil Desa Rancajaya"
-    subtitle="Mengenal lebih dekat Desa Rancajaya, Kecamatan Patokbeusi, Kabupaten Subang, Jawa Barat"
+    title={`Profil Desa ${common.nama_desa || 'Rancajaya'}`}
+    subtitle={`Mengenal lebih dekat Desa ${common.nama_desa || 'Rancajaya'}, Kecamatan ${common.kecamatan || 'Patokbeusi'}, Kabupaten ${common.kabupaten || 'Subang'}`}
   />
 
   <!-- 2. Sambutan Kepala Desa -->
@@ -30,8 +40,8 @@ import StatCard from '../components/StatCard.astro';
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
             </div>
-            <h3 class="font-bold text-ink mt-3">[Nama Kepala Desa]</h3>
-            <p class="text-sm text-muted">Kepala Desa Rancajaya</p>
+            <h3 class="font-bold text-ink mt-3">{profil.nama_kades || '[Nama Kepala Desa]'}</h3>
+            <p class="text-sm text-muted">Kepala Desa {common.nama_desa || 'Rancajaya'}</p>
           </div>
 
           <!-- Quote/Greeting Right -->
@@ -40,15 +50,13 @@ import StatCard from '../components/StatCard.astro';
               <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
               <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
             </svg>
-            <p class="text-muted leading-relaxed italic mb-4">
-              "Assalamu'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT atas segala rahmat dan karunia-Nya. Saya mengucapkan selamat datang di website resmi Desa Rancajaya."
-            </p>
-            <p class="text-muted leading-relaxed italic mb-4">
-              "Website ini hadir sebagai sarana informasi dan komunikasi bagi seluruh warga Desa Rancajaya serta masyarakat umum. Melalui website ini, kami berharap dapat memberikan pelayanan yang lebih transparan, efisien, dan mudah diakses oleh semua pihak."
-            </p>
-            <p class="text-muted leading-relaxed italic">
-              "Mari bersama-sama kita bangun Desa Rancajaya menuju desa yang lebih maju, sejahtera, dan berdaya saing. Semoga website ini bermanfaat bagi kita semua. Wassalamu'alaikum Warahmatullahi Wabarakatuh."
-            </p>
+            {profil.sambutan ? (
+              profil.sambutan.split('\n').map((paragraph) => (
+                paragraph.trim() && <p class="text-muted leading-relaxed italic mb-4">{paragraph}</p>
+              ))
+            ) : (
+              <p class="text-muted leading-relaxed italic mb-4">"Sambutan belum tersedia."</p>
+            )}
           </div>
         </div>
       </div>
@@ -67,7 +75,7 @@ import StatCard from '../components/StatCard.astro';
       <div class="card p-6 md:p-8 mb-8 text-center border-primary-200 bg-gradient-to-br from-white to-primary-50 animate-fade-in-up stagger-2">
         <span class="eyebrow text-primary-700">Visi</span>
         <p class="text-lg md:text-xl font-display font-bold text-ink mt-3 leading-relaxed">
-          "Terwujudnya Desa Rancajaya yang Maju, Mandiri, dan Sejahtera Berbasis Pertanian dan Nilai Keagamaan"
+          "{common.visi || 'Visi belum tersedia'}"
         </p>
       </div>
 
@@ -75,42 +83,18 @@ import StatCard from '../components/StatCard.astro';
       <div>
         <h3 class="text-center font-display font-bold text-ink mb-6">Misi</h3>
         <div class="grid md:grid-cols-2 gap-4">
-          <div class="card p-5 animate-fade-in-up stagger-1">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">1</div>
-              <p class="text-muted leading-relaxed">Meningkatkan kualitas pelayanan publik yang transparan, akuntabel, dan berbasis teknologi informasi.</p>
-            </div>
-          </div>
-          <div class="card p-5 animate-fade-in-up stagger-2">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">2</div>
-              <p class="text-muted leading-relaxed">Mengembangkan potensi pertanian sebagai sektor unggulan perekonomian desa yang berkelanjutan.</p>
-            </div>
-          </div>
-          <div class="card p-5 animate-fade-in-up stagger-3">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">3</div>
-              <p class="text-muted leading-relaxed">Meningkatkan kualitas sumber daya manusia melalui pendidikan, pelatihan, dan pemberdayaan masyarakat.</p>
-            </div>
-          </div>
-          <div class="card p-5 animate-fade-in-up stagger-4">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">4</div>
-              <p class="text-muted leading-relaxed">Membangun infrastruktur desa yang memadai guna menunjang kesejahteraan dan mobilitas masyarakat.</p>
-            </div>
-          </div>
-          <div class="card p-5 animate-fade-in-up stagger-5">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">5</div>
-              <p class="text-muted leading-relaxed">Memperkuat kehidupan beragama dan melestarikan nilai-nilai budaya lokal sebagai identitas desa.</p>
-            </div>
-          </div>
-          <div class="card p-5 animate-fade-in-up stagger-6">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">6</div>
-              <p class="text-muted leading-relaxed">Menciptakan lingkungan desa yang bersih, sehat, dan asri melalui program pengelolaan lingkungan terpadu.</p>
-            </div>
-          </div>
+          {common.misi && common.misi.length > 0 ? (
+            common.misi.map((misiItem, index) => (
+              <div class="card p-5 animate-fade-in-up">
+                <div class="flex gap-4">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center font-bold font-display text-sm">{index + 1}</div>
+                  <p class="text-muted leading-relaxed">{misiItem}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p class="text-center text-muted col-span-2">Misi belum tersedia.</p>
+          )}
         </div>
       </div>
     </div>
@@ -122,30 +106,27 @@ import StatCard from '../components/StatCard.astro';
       <div class="section-header">
         <span class="eyebrow animate-fade-in-up">Struktur Organisasi</span>
         <h2 class="section-title animate-fade-in-up stagger-1">Perangkat Desa</h2>
-        <p class="section-subtitle animate-fade-in-up stagger-2">Aparatur pemerintahan Desa Rancajaya</p>
+        <p class="section-subtitle animate-fade-in-up stagger-2">Aparatur pemerintahan Desa {common.nama_desa || 'Rancajaya'}</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { nama: '[Nama Kepala Desa]', jabatan: 'Kepala Desa' },
-          { nama: '[Nama Sekretaris]', jabatan: 'Sekretaris Desa' },
-          { nama: '[Nama Kaur Keuangan]', jabatan: 'Kaur Keuangan' },
-          { nama: '[Nama Kaur Perencanaan]', jabatan: 'Kaur Perencanaan' },
-          { nama: '[Nama Kasi Pemerintahan]', jabatan: 'Kasi Pemerintahan' },
-          { nama: '[Nama Kasi Kesejahteraan]', jabatan: 'Kasi Kesejahteraan' },
-          { nama: '[Nama Kasi Pelayanan]', jabatan: 'Kasi Pelayanan' },
-          { nama: '[Nama Kaur Tata Usaha]', jabatan: 'Kaur Tata Usaha & Umum' },
-        ].map((pejabat, i) => (
+        {sortedPerangkat.length > 0 ? sortedPerangkat.map((pejabat) => (
           <div class="card p-4 text-center animate-fade-in-up">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center mx-auto mb-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary-300">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center mx-auto mb-3 overflow-hidden">
+              {pejabat.data.foto ? (
+                <img src={pejabat.data.foto.startsWith('/') ? base + pejabat.data.foto : pejabat.data.foto} alt={pejabat.data.nama} class="w-full h-full object-cover" />
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary-300">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              )}
             </div>
-            <h4 class="font-semibold text-sm text-ink">{pejabat.nama}</h4>
-            <p class="text-xs text-muted mt-1">{pejabat.jabatan}</p>
+            <h4 class="font-semibold text-sm text-ink">{pejabat.data.nama}</h4>
+            <p class="text-xs text-muted mt-1">{pejabat.data.jabatan}</p>
           </div>
-        ))}
+        )) : (
+          <p class="text-muted col-span-4 text-center">Data perangkat desa belum ditambahkan.</p>
+        )}
       </div>
     </div>
   </section>
@@ -203,7 +184,7 @@ import StatCard from '../components/StatCard.astro';
           </div>
           <div class="px-5 py-3 bg-primary-50 flex justify-between">
             <span class="text-sm font-bold text-primary-700">Luas Wilayah</span>
-            <span class="text-sm font-bold text-primary-700">8.11 km²</span>
+            <span class="text-sm font-bold text-primary-700">{profil.luas_wilayah || '0'} km²</span>
           </div>
         </div>
 
@@ -219,14 +200,14 @@ import StatCard from '../components/StatCard.astro';
             </h3>
           </div>
           <div class="divide-y divide-line">
-            {['Dusun I', 'Dusun II', 'Dusun III', 'Dusun IV'].map((dusun, i) => (
+            {(profil.dusun || []).map((dusun, i) => (
               <div class="flex items-center gap-4 px-5 py-4">
                 <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
                   <span class="text-sm font-bold text-primary-700">{i + 1}</span>
                 </div>
                 <div>
                   <h4 class="font-semibold text-sm text-ink">{dusun}</h4>
-                  <p class="text-xs text-muted">Desa Rancajaya</p>
+                  <p class="text-xs text-muted">Desa {common.nama_desa || 'Rancajaya'}</p>
                 </div>
               </div>
             ))}
@@ -242,14 +223,14 @@ import StatCard from '../components/StatCard.astro';
       <div class="section-header">
         <span class="eyebrow animate-fade-in-up">Data Penduduk</span>
         <h2 class="section-title animate-fade-in-up stagger-1">Demografi</h2>
-        <p class="section-subtitle animate-fade-in-up stagger-2">Data kependudukan Desa Rancajaya</p>
+        <p class="section-subtitle animate-fade-in-up stagger-2">Data kependudukan Desa {common.nama_desa || 'Rancajaya'}</p>
       </div>
 
       <!-- Stat Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <StatCard value="±8.500" label="Total Penduduk (Jiwa)" variant="dark" />
-        <StatCard value="±4.300" label="Laki-laki (Jiwa)" />
-        <StatCard value="±4.200" label="Perempuan (Jiwa)" />
+        <StatCard value={`±${profil.penduduk_total || '0'}`} label="Total Penduduk (Jiwa)" variant="dark" />
+        <StatCard value={`±${profil.penduduk_pria || '0'}`} label="Laki-laki (Jiwa)" />
+        <StatCard value={`±${profil.penduduk_wanita || '0'}`} label="Perempuan (Jiwa)" />
       </div>
 
       <!-- Age Distribution Placeholder -->

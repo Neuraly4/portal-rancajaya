@@ -1,0 +1,14 @@
+{
+  "hero_title": "Selamat Datang di Portal Rancajaya",
+  "hero_subtitle": "Media informasi, potensi desa, layanan masyarakat, dan digitalisasi UMKM Desa Rancajaya",
+  "hero_bg": "",
+  "highlight_title": "Lumbung Padi di Utara Subang",
+  "highlight_desc": "Sebagian besar wilayah Desa Rancajaya merupakan hamparan sawah yang membentang luas. Sektor pertanian menjadi tulang punggung perekonomian masyarakat kami dengan komoditas unggulan berupa padi sawah yang ditunjang oleh sistem irigasi teknis.",
+  "highlight_image": "",
+  "statistik": [
+    { "label": "Luas Wilayah", "value": "8.11 km²" },
+    { "label": "Jumlah Dusun", "value": "4 Dusun" },
+    { "label": "Jumlah RT", "value": "25 RT" },
+    { "label": "Jumlah Penduduk", "value": "±8.500" }
+  ]
+}
