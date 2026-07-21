@@ -20,37 +20,40 @@ Website Desa Rancajaya dikelola menggunakan **Decap CMS**. Sistem ini memungkink
 ### 3. Memahami Struktur Konten (Collections)
 Di sisi kiri layar (Sidebar), Anda akan melihat beberapa menu (Collections). Berikut penjelasan untuk setiap menu:
 
-#### A. Halaman Beranda, Profil, Pertanian, Layanan
+#### A. Halaman Website
 Digunakan untuk mengubah konten utama di masing-masing halaman.
-- **Beranda**: Mengubah kalimat ucapan selamat datang, deskripsi potensi unggulan, dan statistik ringkas.
-- **Profil**: Mengubah kata sambutan Kepala Desa, merubah struktur demografi penduduk (chart akan otomatis ter-update), dan memperbarui data Transparansi APBDes tahunan.
-- **Pertanian**: Mengubah angka produktivitas, luas lahan, dan penjelasan komoditas.
-- **Layanan**: Menambahkan *Link Formulir Google Form* untuk layanan administrasi (contoh: SKTM, SKU) dan menambahkan pertanyaan FAQ (Tanya Jawab).
+- **Halaman Beranda**: Mengubah kalimat ucapan selamat datang, deskripsi potensi unggulan, dan statistik ringkas.
+- **Halaman Profil**: Mengubah kata sambutan Kepala Desa, merubah struktur demografi penduduk (chart akan otomatis ter-update), dan memperbarui data Transparansi APBDes tahunan.
+- **Halaman Pertanian**: Mengubah angka produktivitas, luas lahan, dan penjelasan komoditas.
+- **Halaman Layanan**: Menambahkan *Link Formulir Google Form* untuk layanan administrasi (contoh: SKTM, SKU) dan menambahkan pertanyaan FAQ (Tanya Jawab).
 
-#### B. Berita & Informasi
-Kumpulan artikel, pengumuman, dan berita agenda desa.
-- Klik **"New Berita & Informasi"** untuk membuat berita baru.
-- Isi *Judul*, *Tanggal*, dan pilih *Kategori* (Berita, Agenda, Artikel, Pengumuman). Kategori sangat penting agar sistem filter di halaman Informasi berfungsi.
-- Anda dapat mengunggah gambar *Thumbnail* dengan menekan area "Choose an image".
-- Tuliskan ringkasan (Excerpt) pendek, dan isi isi lengkap berita pada kolom *Body* (mendukung format tulisan tebal, miring, list, dsb).
-
-#### C. Galeri (Dokumentasi Kegiatan)
-Kumpulan foto-foto kegiatan desa.
-- Sangat penting untuk mengisi *Kategori*. Jika Anda mengisi kategori **"Pertanian"**, maka foto tersebut akan otomatis muncul di bagian Dokumentasi halaman Pertanian.
-
-#### D. Kelompok Tani
-Daftar seluruh Gapoktan/Poktan di desa. Menambahkan nama ketua, dusun, komoditas utama, dan jumlah anggota.
-
-#### E. Layanan Darurat
-Daftar nomor kontak penting (Puskesmas, Bhabinkamtibmas, Babinsa, dll). Data yang Anda masukkan akan langsung ditampilkan di halaman "Layanan" bagian bawah.
-
-#### F. Pengaturan Umum
+#### B. Pengaturan Umum
 Mengatur data inti website seperti:
 - Nama Desa, Kecamatan, Kabupaten, Provinsi.
 - Visi & Misi Desa.
 - Sejarah Singkat.
 - Nomor Telepon Resmi, Email, Alamat Lengkap, dan Jam Operasional Kantor.
 *Catatan: Pastikan Anda tidak menghapus data pada Pengaturan Umum, melainkan hanya mengedit teksnya.*
+
+#### C. Berita & Informasi
+Kumpulan artikel, pengumuman, dan berita agenda desa.
+- Klik **"New Berita & Informasi"** untuk membuat berita baru.
+- Isi *Judul*, *Tanggal*, dan pilih *Kategori* (Berita, Agenda, Artikel, Pengumuman). Kategori sangat penting agar sistem filter di halaman Informasi berfungsi.
+- Anda dapat mengunggah gambar *Thumbnail* dengan menekan area "Choose an image".
+- Tuliskan ringkasan (Excerpt) pendek, dan isi isi lengkap berita pada kolom *Body* (mendukung format tulisan tebal, miring, list, dsb).
+
+#### D. Galeri & Dokumentasi
+Kumpulan foto-foto kegiatan desa.
+- Sangat penting untuk mengisi *Kategori*. Jika Anda mengisi kategori **"Pertanian"**, maka foto tersebut akan otomatis muncul di bagian Dokumentasi halaman Pertanian.
+
+#### E. Kelompok Tani
+Daftar seluruh Gapoktan/Poktan di desa. Menambahkan nama ketua, dusun, komoditas utama, dan jumlah anggota.
+
+#### F. Kontak Darurat
+Daftar nomor kontak penting (Puskesmas, Bhabinkamtibmas, Babinsa, dll). Data yang Anda masukkan akan langsung ditampilkan di halaman "Layanan" bagian bawah.
+
+#### G. Perangkat Desa
+Daftar seluruh aparatur desa beserta jabatan, urutan, dan fotonya.
 
 ---
 

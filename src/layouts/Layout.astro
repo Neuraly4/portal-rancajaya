@@ -3,13 +3,47 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
+import { getEntry } from 'astro:content';
+
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
 }
 
-const { title = "Portal Rancajaya", description = "Portal informasi resmi Desa Rancajaya" } = Astro.props;
+const { 
+	title = "Portal Rancajaya", 
+	description = "Portal informasi resmi Desa Rancajaya",
+	image = "/images/SawahRancajaya.jpg"
+} = Astro.props;
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://portal-rancajaya.netlify.app';
+const imageUrl = `${siteUrl}${base}${image}`;
+
+// Get data for Structured Data
+const umumData = await getEntry('pengaturan', 'umum');
+const common = umumData?.data || {};
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "GovernmentOrganization",
+	"name": `Pemerintah Desa ${common.nama_desa || 'Rancajaya'}`,
+	"url": siteUrl,
+	"logo": `${siteUrl}${base}/favicon.svg`,
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": common.alamat_kantor || "",
+		"addressLocality": common.kecamatan || "",
+		"addressRegion": common.provinsi || "",
+		"addressCountry": "ID"
+	},
+	"contactPoint": {
+		"@type": "ContactPoint",
+		"telephone": common.telepon || "",
+		"contactType": "customer service"
+	}
+};
 ---
 
 <!doctype html>
@@ -27,6 +61,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:site_name" content={`Portal Desa ${common.nama_desa || 'Rancajaya'}`} />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
 		
 		<!-- Netlify Identity Widget -->
 		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

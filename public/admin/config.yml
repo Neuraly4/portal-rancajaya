@@ -12,7 +12,7 @@ locale: 'id'
 collections:
   # --- Berita ---
   - name: "berita"
-    label: "Berita & Artikel"
+    label: "Berita & Informasi"
     folder: "src/content/berita"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -44,7 +44,7 @@ collections:
 
   # --- Galeri ---
   - name: "galeri"
-    label: "Galeri"
+    label: "Galeri & Dokumentasi"
     folder: "src/content/galeri"
     create: true
     fields:
@@ -73,7 +73,7 @@ collections:
 
   # --- Layanan Darurat ---
   - name: "layanan_darurat"
-    label: "Layanan Darurat"
+    label: "Kontak Darurat"
     folder: "src/content/layanan-darurat"
     create: true
     fields:
@@ -109,6 +109,10 @@ collections:
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Jam Operasional", name: "jam_operasional", widget: "text" }
 
+  # --- Halaman Website (Single File) ---
+  - name: "halaman"
+    label: "Halaman Website"
+    files:
       - label: "Halaman Beranda"
         name: "beranda"
         file: "src/content/halaman/beranda.json"
