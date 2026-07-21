@@ -4,8 +4,6 @@ backend:
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
-media_library:
-  max_file_size: 512000 # 500 KB limit for images to optimize load times
 
 locale: 'id'
 
