@@ -19,8 +19,8 @@ const {
   bgImage
 } = Astro.props;
 
-// Jika bgImage kosong/undefined tapi diminta dari CMS, kita gunakan gambar fallback sementara dari Unsplash
-const fallbackBg = "https://images.unsplash.com/photo-1590055531615-f16d36ffe8ce?q=80&w=2070&auto=format&fit=crop";
+// Jika bgImage kosong/undefined tapi diminta dari CMS, kita gunakan gambar fallback
+const fallbackBg = import.meta.env.BASE_URL.replace(/\/$/, '') + "/images/SawahRancajaya.jpg";
 const finalBgImage = bgImage || fallbackBg;
 ---
 

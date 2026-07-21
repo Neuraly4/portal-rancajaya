@@ -41,45 +41,6 @@ collections:
       - { label: "Urutan", name: "urutan", widget: "number", value_type: "int" }
       - { label: "Deskripsi", name: "deskripsi", widget: "text", required: false }
 
-  # --- Wisata ---
-  - name: "wisata"
-    label: "Wisata"
-    folder: "src/content/wisata"
-    create: true
-    fields:
-      - { label: "Nama", name: "nama", widget: "string" }
-      - label: "Jenis"
-        name: "jenis"
-        widget: "select"
-        options: ["Alam", "Budaya", "Kuliner", "Edukasi"]
-      - { label: "Deskripsi", name: "deskripsi", widget: "markdown" }
-      - { label: "Lokasi", name: "lokasi", widget: "string" }
-      - { label: "Foto", name: "foto", widget: "image", required: false }
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        options: ["Aktif", "Dalam Pengembangan"]
-
-  # --- UMKM ---
-  - name: "umkm"
-    label: "UMKM"
-    folder: "src/content/umkm"
-    create: true
-    fields:
-      - { label: "Nama Produk", name: "nama_produk", widget: "string" }
-      - { label: "Harga", name: "harga", widget: "string" }
-      - label: "Kategori"
-        name: "kategori"
-        widget: "select"
-        options: ["Makanan", "Minuman", "Kerajinan", "Pertanian", "Lainnya"]
-      - { label: "Nama Toko", name: "toko", widget: "string" }
-      - { label: "WhatsApp", name: "whatsapp", widget: "string" }
-      - { label: "Deskripsi", name: "deskripsi", widget: "markdown" }
-      - { label: "Foto", name: "foto", widget: "image", required: false }
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        options: ["Aktif", "Nonaktif"]
 
   # --- Galeri ---
   - name: "galeri"
@@ -213,3 +174,21 @@ collections:
           - { label: "Jumlah Petani", name: "jumlah_petani", widget: "string" }
           - { label: "Jenis Irigasi", name: "irigasi", widget: "string" }
           - { label: "Produktivitas (Ton/Ha)", name: "produktivitas", widget: "string" }
+
+      - label: "Halaman Layanan"
+        name: "layanan"
+        file: "src/content/halaman/layanan.json"
+        fields:
+          - label: "Layanan Administrasi"
+            name: "administrasi"
+            widget: "list"
+            fields:
+              - { label: "Nama Layanan", name: "nama", widget: "string" }
+              - { label: "Link Formulir", name: "link", widget: "string" }
+              - { label: "Ikon (SVG path atau text)", name: "ikon", widget: "string", required: false }
+          - label: "Tanya Jawab (FAQ)"
+            name: "faq"
+            widget: "list"
+            fields:
+              - { label: "Pertanyaan", name: "q", widget: "string" }
+              - { label: "Jawaban", name: "a", widget: "text" }
