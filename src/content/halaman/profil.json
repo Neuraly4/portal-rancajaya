@@ -10,5 +10,25 @@
   ],
   "penduduk_total": "8.500",
   "penduduk_pria": "4.200",
-  "penduduk_wanita": "4.300"
+  "penduduk_wanita": "4.300",
+  "demo_dusun": [
+    { "label": "Dusun Krajan", "value": 2500 },
+    { "label": "Dusun Sukajadi", "value": 2000 },
+    { "label": "Dusun Mekarsari", "value": 2200 },
+    { "label": "Dusun Harapan", "value": 1800 }
+  ],
+  "demo_pendidikan": [
+    { "label": "SD", "value": 3000 },
+    { "label": "SMP", "value": 2500 },
+    { "label": "SMA", "value": 2000 },
+    { "label": "Sarjana", "value": 1000 }
+  ],
+  "apbdes": {
+    "pendapatan": "Rp 1.500.000.000",
+    "belanja": "Rp 1.450.000.000",
+    "riwayat": [
+      { "tahun": "2023", "pendapatan": 1400000000, "belanja": 1350000000 },
+      { "tahun": "2024", "pendapatan": 1500000000, "belanja": 1450000000 }
+    ]
+  }
 }

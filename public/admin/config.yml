@@ -2,6 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
+publish_mode: editorial_workflow
+
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
@@ -175,6 +177,31 @@ collections:
           - { label: "Total Penduduk", name: "penduduk_total", widget: "string" }
           - { label: "Penduduk Pria", name: "penduduk_pria", widget: "string" }
           - { label: "Penduduk Wanita", name: "penduduk_wanita", widget: "string" }
+          - label: "Demografi Dusun"
+            name: "demo_dusun"
+            widget: "list"
+            fields:
+              - { label: "Nama Dusun", name: "label", widget: "string" }
+              - { label: "Jumlah", name: "value", widget: "number", value_type: "int" }
+          - label: "Demografi Pendidikan"
+            name: "demo_pendidikan"
+            widget: "list"
+            fields:
+              - { label: "Tingkat Pendidikan", name: "label", widget: "string" }
+              - { label: "Jumlah", name: "value", widget: "number", value_type: "int" }
+          - label: "Transparansi APBDes"
+            name: "apbdes"
+            widget: "object"
+            fields:
+              - { label: "Total Pendapatan", name: "pendapatan", widget: "string" }
+              - { label: "Total Belanja", name: "belanja", widget: "string" }
+              - label: "Riwayat Tahunan"
+                name: "riwayat"
+                widget: "list"
+                fields:
+                  - { label: "Tahun", name: "tahun", widget: "string" }
+                  - { label: "Pendapatan (Rp)", name: "pendapatan", widget: "number", value_type: "int" }
+                  - { label: "Belanja (Rp)", name: "belanja", widget: "number", value_type: "int" }
 
       - label: "Halaman Pertanian"
         name: "pertanian"
